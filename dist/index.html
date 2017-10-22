@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+	<title>Banner Ads</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <script src="js/main.min.js"></script>
+
+	<style>
+		#sidebar {float: right;}
+        #sidebar ul li {list-style-type: none; text-transform: capitalize;}
+		#theMain {padding: 0px;}
+        iframe {border: 0px; box-shadow: 0px 8px 6px -4px #666666; background: url(reload.gif) no-repeat center center;}
+        .main {text-transform: capitalize; text-align: center;}
+        .btn-group {margin: 30px auto;}
+        button {outline: none !important;}
+        .zips {text-decoration: underline; color: #5BC0DE;}
+        .zips:hover, .zips:visited {text-decoration: underline; color: #666666;}
+        .well {padding:0px; background: none; border: 0px; margin: 0px;box-shadow: none;}
+        .list-group, .btn-default {box-shadow: none;}
+        .list-group li {margin-bottom: 3px;}
+        h3 {margin-top: 0px; text-shadow: -1px 1px #fff;}
+		@media only screen and (min-width: 767px) {
+			.well {padding: 20px 10px;}
+		}
+    </style>
+    <script>
+        $(function(){
+
+            var current = '300x250';
+            var lang = 'en';
+            var newLang = 'en';
+
+            $('.nav-btn').on('click', function(){
+                $('.nav-btn').removeClass('list-group-item-info');
+                $(this).addClass('list-group-item-info');
+                //get the goods
+                var theGoods = $(this).attr('id');
+                var theParts = theGoods.split('x');
+
+                $('.size').html(theGoods);
+
+                $("iframe").each(function() {
+                    var src= $(this).attr('src').replace(current, theGoods).replace(lang, newLang);
+                    //console.log(src);
+                    $(this).attr('src',src);
+                    $(this).attr('width',theParts[0]);
+                    $(this).attr('height',theParts[1]);
+                });
+                //scroll top for clarity
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                //change the current
+                current = theGoods
+            });
+
+            $('.btn-toggle').click(function() {
+                $(this).find('.btn').toggleClass('active');
+
+                if ($(this).find('.btn-info').size()>0) {
+                    $(this).find('.btn').toggleClass('btn-info');
+                }
+
+                $(this).find('.btn').toggleClass('btn-default');
+
+                newLang = $(this).find('.btn.active').html();
+
+				$('#'+ lang).fadeOut(function(){
+					$('#'+ newLang).fadeIn();
+				});
+
+                $('#'+ newLang +' .nav-btn#300x250').trigger('click').toggleClass('list-group-item-info');
+
+                $('#theMain span.type').html(newLang);
+                $('#'+ newLang + ' #300x250').addClass('list-group-item-info');
+
+                $("iframe").each(function() {
+                    var src= $(this).attr('src').replace(current, '300x250').replace(lang, newLang);
+                    $(this).attr('src',src);
+                    $(this).attr('width','300');
+                    $(this).attr('height','250');
+                });
+                //scroll top for clarity
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                //change the current
+                current = '300x250';
+                lang = newLang;
+            });
+        });
+    </script>
+</head>
+<body>
+   <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-10" id="theMain">
+            <h1 class="main">BMW</h1>
+            <div class="well well-sm text-center">
+                <h3><span class="type">X3</span> <span class="hidden-xs">-</span> <span class="size">300x250</span></h3>
+                <iframe border="0" src="en/300x250/index.html" width="300" height="250"></iframe>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-2" id="sidebar">
+          <div class="btn-group btn-toggle pull-right">
+            <!-- <button class="btn btn-md btn-info active">en</button>
+            <button class="btn btn-md btn-default">fr</button> -->
+          </div>
+          <div class="clearfix"></div>
+          <ul id="en" class="list-group text-center">
+            <li><a href="javascript:;" class="list-group-item list-group-item-info nav-btn" id="300x250">300x250</a></li>
+            <li><a href="javascript:;" class="list-group-item nav-btn" id="300x600">300x600</a></li>
+            <li><a href="javascript:;" class="list-group-item nav-btn" id="160x600">160x600</a></li>
+            <li><a href="javascript:;" class="list-group-item nav-btn" id="728x90">728x90</a></li>
+            <li><a href="javascript:;" class="list-group-item nav-btn" id="320x50">320x50</a></li>
+          </ul>
+          <h5 class="text-right">Zip Files:</h5>
+          <p class="text-right"><a href="en.zip" class="zips" target="_blank">en.zip</a></p>
+		  <h5 class="text-right">Back up images:</h5>
+          <p class="text-right"><a href="backups.zip" class="zips" target="_blank">backups.zip</a></p>
+        </div>
+       </div>
+    </div>
+</body>
+</html>
