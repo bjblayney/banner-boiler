@@ -9,95 +9,15 @@
     <!--build:css css/styles.min.css-->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <!-- endbuild -->
 
     <!--build:js js/main.min.js -->
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     <script src="js/vendor/jquery-1.11.2.min.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
     <!-- endbuild -->
-
-	<style>
-		#sidebar {float: right;}
-        #sidebar ul li {list-style-type: none; text-transform: capitalize;}
-		#theMain {padding: 0px;}
-        iframe {border: 0px; box-shadow: 0px 8px 6px -4px #666666; background: url(reload.gif) no-repeat center center;}
-        .main {text-transform: capitalize; text-align: center;}
-        .btn-group {margin: 30px auto;}
-        button {outline: none !important;}
-        .zips {text-decoration: underline; color: #5BC0DE;}
-        .zips:hover, .zips:visited {text-decoration: underline; color: #666666;}
-        .well {padding:0px; background: none; border: 0px; margin: 0px;box-shadow: none;}
-        .list-group, .btn-default {box-shadow: none;}
-        .list-group li {margin-bottom: 3px;}
-        h3 {margin-top: 0px; text-shadow: -1px 1px #fff;}
-		@media only screen and (min-width: 767px) {
-			.well {padding: 20px 10px;}
-		}
-    </style>
-    <script>
-        $(function(){
-
-            var current = '300x250';
-            var lang = 'en';
-            var newLang = 'en';
-
-            $('.nav-btn').on('click', function(){
-                $('.nav-btn').removeClass('list-group-item-info');
-                $(this).addClass('list-group-item-info');
-                //get the goods
-                var theGoods = $(this).attr('id');
-                var theParts = theGoods.split('x');
-
-                $('.size').html(theGoods);
-
-                $("iframe").each(function() {
-                    var src= $(this).attr('src').replace(current, theGoods).replace(lang, newLang);
-                    //console.log(src);
-                    $(this).attr('src',src);
-                    $(this).attr('width',theParts[0]);
-                    $(this).attr('height',theParts[1]);
-                });
-                //scroll top for clarity
-                $("html, body").animate({ scrollTop: 0 }, "slow");
-                //change the current
-                current = theGoods
-            });
-
-            $('.btn-toggle').click(function() {
-                $(this).find('.btn').toggleClass('active');
-
-                if ($(this).find('.btn-info').size()>0) {
-                    $(this).find('.btn').toggleClass('btn-info');
-                }
-
-                $(this).find('.btn').toggleClass('btn-default');
-
-                newLang = $(this).find('.btn.active').html();
-
-				$('#'+ lang).fadeOut(function(){
-					$('#'+ newLang).fadeIn();
-				});
-
-                $('#'+ newLang +' .nav-btn#300x250').trigger('click').toggleClass('list-group-item-info');
-
-                $('#theMain span.type').html(newLang);
-                $('#'+ newLang + ' #300x250').addClass('list-group-item-info');
-
-                $("iframe").each(function() {
-                    var src= $(this).attr('src').replace(current, '300x250').replace(lang, newLang);
-                    $(this).attr('src',src);
-                    $(this).attr('width','300');
-                    $(this).attr('height','250');
-                });
-                //scroll top for clarity
-                $("html, body").animate({ scrollTop: 0 }, "slow");
-                //change the current
-                current = '300x250';
-                lang = newLang;
-            });
-        });
-    </script>
 </head>
 <body>
    <div class="container">

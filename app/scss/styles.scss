@@ -1,1 +1,55 @@
-.testing {width: percentage(5/7); background: #000;}
+#sidebar {
+    float: right;
+    ul {
+        li {
+            list-style-type: none;
+            text-transform: capitalize;
+        }
+    }
+}
+#theMain {
+    padding: 0px;
+}
+iframe {
+    border: 0px; 
+    box-shadow: 0px 8px 6px -4px #666666; 
+    background: url(reload.gif) no-repeat center center;
+}
+.main {
+    text-transform: capitalize; 
+    text-align: center;
+}
+.btn-group {
+    margin: 30px auto;
+}
+button {
+    outline: none !important;
+}
+.zips {
+    text-decoration: underline; 
+    color: #5BC0DE;
+    &:hover, &:visited {
+        text-decoration: underline; 
+        color: #666666;
+    }
+}
+.well {
+    padding:0px; 
+    background: none; 
+    border: 0px; 
+    margin: 0px;
+    box-shadow: none;
+}
+.list-group, .btn-default {
+    box-shadow: none;
+}
+.list-group li {
+    margin-bottom: 3px;
+}
+h3 {
+    margin-top: 0px; 
+    text-shadow: -1px 1px #fff;
+}
+@media only screen and (min-width: 767px) {
+    .well {padding: 20px 10px;}
+}
